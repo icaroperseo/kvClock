@@ -20,11 +20,16 @@ class ClockUI(BoxLayout):
 
 
 class ClockApp(App):
+    icon = 'assets/img/icon.png'
+    title = 'kvClock'
+
     def build(self):
         return ClockUI()
 
 if __name__ == '__main__':
     Window.clearcolor = get_color_from_hex('#101216')
-    LabelBase.register(name='Roboto', fn_regular='assets/fonts/Roboto-Thin.ttf',
+    Window.size = (360, 280)
+    LabelBase.register(name='Roboto',
+                       fn_regular='assets/fonts/Roboto-Thin.ttf',
                        fn_bold='assets/fonts/Roboto-Medium.ttf')
     ClockApp().run()
