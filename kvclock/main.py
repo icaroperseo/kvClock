@@ -6,6 +6,7 @@ kivy.require('1.9.1')
 
 from kivy.app import App
 from kivy.clock import Clock
+from kivy.properties import ObjectProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivy.core.window import Window
 from kivy.core.text import LabelBase
@@ -19,12 +20,17 @@ __license__ = "gpl3"
 
 
 class ClockUI(BoxLayout):
-    pass
+    time_property = ObjectProperty(None)
+    stopwatch_property = ObjectProperty(None)
+    start_stop_property = ObjectProperty(None)
 
 
 class ClockApp(App):
     icon = 'assets/img/icon.png'
     title = 'kvClock'
+
+    sw_seconds = 0
+    sw_started = False
 
     def build(self):
         return ClockUI()
@@ -33,7 +39,18 @@ class ClockApp(App):
         Clock.schedule_interval(self.update, 0)
 
     def update(self, nap):
-        self.root.ids.time.text = strftime('[b]%H[/b]:%M:%S')
+        if self.sw_started:
+            self.sw_seconds += nap
+
+        self.root.time_property.text = strftime('[b]%H[/b]:%M:%S')
+
+        minutes, seconds = divmod(self.sw_seconds, 60)
+        self.root.stopwatch_property.text = ('%02d:%02d.[size=40]%02d[/size]' % (int(minutes),
+                                                                                 int(seconds),
+                                                                                 int(seconds * 100 % 100)))
+    def start_stop(self):
+        self.root.start_stop_property.text = ('Start' if self.sw_started else 'Stop')
+        self.sw_started = not self.sw_started
 
 if __name__ == '__main__':
     Window.clearcolor = get_color_from_hex('#101216')

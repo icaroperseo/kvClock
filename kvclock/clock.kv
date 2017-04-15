@@ -15,6 +15,9 @@
 
 <ClockUI>:
     orientation: 'vertical'
+    start_stop_property: start_stop
+    stopwatch_property: stopwatch
+    time_property: time
 
     RobotoLabel:
         id: time
@@ -28,7 +31,10 @@
         size_hint: (1, None)
 
         RobotoButton:
+            id: start_stop
             text: 'Start'
+
+            on_press: app.start_stop()
 
         RobotoButton:
             background_down: 'assets/img/red_button_down.png'
@@ -36,4 +42,5 @@
             text: 'Reset'
 
     RobotoLabel:
+        id: stopwatch
         text: '00:00.[size=40]00[/size]'
