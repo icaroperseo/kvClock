@@ -2,4 +2,4 @@
 Developers
 ==========
 
-* Icaro Perseo <icaroperseo@protonmail.com>
+* Icaro Perseo <icaroperseo[at]protonmail[dot]com>
