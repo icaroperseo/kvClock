@@ -45,12 +45,13 @@ class ClockApp(App):
         self.root.time_property.text = strftime('[b]%H[/b]:%M:%S')
 
         minutes, seconds = divmod(self.sw_seconds, 60)
-        self.root.stopwatch_property.text = ('%02d:%02d.[size=40]%02d[/size]' % (int(minutes),
-                                                                                 int(seconds),
-                                                                                 int(seconds * 100 % 100)))
+        self.root.stopwatch_property.text = ('%02d:%02d.[size=40]%02d[/size]'
+                                             % (int(minutes), int(seconds),
+                                                int(seconds * 100 % 100)))
 
     def start_stop(self):
-        self.root.start_stop_property.text = ('Start' if self.sw_started else 'Stop')
+        self.root.start_stop_property.text = ('Start'
+                                              if self.sw_started else 'Stop')
         self.sw_started = not self.sw_started
 
     def reset(self):
@@ -59,6 +60,7 @@ class ClockApp(App):
             self.sw_started = False
 
         self.sw_seconds = 0
+
 
 if __name__ == '__main__':
     Window.clearcolor = get_color_from_hex('#101216')
